@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
-
+import path from 'path'
+import glob from 'fast-glob'
+import fs from 'fs'
 
 export default defineConfig({
     title: '题解',
@@ -12,16 +14,36 @@ export default defineConfig({
         sidebar: [
             {
                 text: '每日一题（ 2022-10 ）',
-                items: [
-                    { text: '1694. 重新格式化电话号码', link: '/reformat-phone-number' },
-                ]
+                items: generateDailyRouters('2022-10')
             },
             {
                 text: '周赛',
-                items: [
-                ]
+                items: []
             }
 
         ]
     }
 })
+
+
+function generateDailyRouters(suffix) {
+    const dir = path.resolve(__dirname, '../daily', suffix)
+    const dailySolutions = glob.sync(path.join(dir, '**/*.md'))
+
+    const dailyRouters = dailySolutions.map(filePath => {
+        const filename = path.parse(filePath).name
+        const text = fs.readFileSync(filePath, {
+            encoding: 'utf-8'
+        })
+
+        const title = text.trim().split('\n')[0].trim().slice(1)
+
+        return {
+            text: title,
+            link: path.join('/daily', suffix, filename)
+        }
+    })
+
+    return dailyRouters
+}
+
