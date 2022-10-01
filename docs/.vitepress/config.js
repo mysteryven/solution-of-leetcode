@@ -14,20 +14,19 @@ export default defineConfig({
         sidebar: [
             {
                 text: '每日一题（ 2022-10 ）',
-                items: generateDailyRouters('2022-10')
+                items: generateDailyRouters('daily/2022-10')
             },
             {
                 text: '周赛',
-                items: []
+                items:  generateDailyRouters('weekly') 
             }
 
         ]
     }
 })
 
-
 function generateDailyRouters(suffix) {
-    const dir = path.resolve(__dirname, '../daily', suffix)
+    const dir = path.resolve(__dirname, '../', suffix)
     const dailySolutions = glob.sync(path.join(dir, '**/*.md'))
 
     const dailyRouters = dailySolutions.map(filePath => {
@@ -40,7 +39,7 @@ function generateDailyRouters(suffix) {
 
         return {
             text: title,
-            link: path.join('/daily', suffix, filename)
+            link: path.join("/", suffix, filename)
         }
     })
 
