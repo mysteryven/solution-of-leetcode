@@ -6,7 +6,7 @@ import fs from 'fs'
 export default defineConfig({
     title: '题解',
     description: '力扣题解和每日一题',
-    lastUpdated: true,
+    lastUpdate: true,
     themeConfig: {
         socialLinks: [
             { icon: 'github', link: 'https://github.com/mysteryven/solution-of-leetcode' },
