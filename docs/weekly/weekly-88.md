@@ -134,10 +134,87 @@ var xorAllNums = function(nums1, nums2) {
     }, 0)
 };
 ```
-
+****
 ## [6198. 满足不等式的数对数目](https://leetcode.cn/problems/number-of-pairs-satisfying-inequality/)
 
-待添加
+这个题目要用到树状数组。大体思路如下：
+
+1. 按照元素固有的顺序进行遍历，每次从树状数组里取看当前已经有多少个符号条件的数据
+2. 把当前数据添加到数组数组
+
+比较难以理解的是：
+
+```
+ for (let v of diffArray) {
+    ans += t.query(lowerBound(copy, v + diff + 1))
+    t.add(lowerBound(copy, v) + 1)
+}
+```
+首先要明白树状数组每一项的含义是在此区间内有多少个小于等于当前值的。
+
+第一行 ` ans += t.query(lowerBound(copy, v + diff + 1))`
+
+我们的答案应该是加 [1, right] 这个区间内符合的数据，所以我们先求 target + 1 的 lowerBound，然后再减 1 就是 right 的值。由于我们树状数组下标是从 1 开始，所以需要查询的是 lowerBound(copy, v + diff + 1) - 1 + 1。简写为上面的形式。
+
+其中 lowerBound 是二分查找大于等于一个值最小值。如果 `[1, 2, 2, 3]` 查找 2 返回索引 1，`[1, 2, 3, 4, 5]` 查找 6 返回索引 4。
+
+第二行 ` t.add(lowerBound(copy, v) + 1)`
+
+树状数组下标从 1 开始，所以要加 1.
 
 
 
+```js
+var numberOfPairs = function(nums1, nums2, diff) {
+    const diffArray = []
+    nums1.forEach((_, i) => {
+        diffArray[i] = nums1[i] - nums2[i]
+    })
+
+    const copy = [...diffArray]
+    copy.sort((a, b) => a-b)
+
+    let ans = 0
+    const t = new BIT(nums1.length + 1)
+
+    for (let v of diffArray) {
+        ans += t.query(lowerBound(copy, v + diff + 1))
+        t.add(lowerBound(copy, v) + 1)
+    }
+
+    return ans
+};
+
+function lowerBound(a, target) {
+    let left = 0, right = a.length;
+    while (left < right) {
+        var mid = Math.floor(left + (right - left) / 2);
+        if (a[mid] < target) left = mid + 1;
+        else right = mid;
+    }
+    return left;
+}
+
+class BIT {
+
+    constructor(n) {
+        this.tree = new Array(n).fill(0);
+    }
+
+    add(x) {
+        while (x < this.tree.length) {
+            ++this.tree[x];
+            x += x & -x;
+        }
+    }
+
+    query(x) {
+        let res = 0;
+        while (x > 0) {
+            res += this.tree[x];
+            x &= x - 1;
+        }
+        return res;
+    }
+}
+```
