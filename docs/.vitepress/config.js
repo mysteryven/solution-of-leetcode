@@ -35,17 +35,14 @@ function generateDailyRouters(suffix) {
             encoding: 'utf-8'
         })
 
-        const stat = fs.statSync(filePath)
-
         const title = text.trim().split('\n')[0].trim().slice(1)
 
         return {
-            time: stat.birthtimeMs,
             text: title,
             link: path.join("/", suffix, filename)
         }
     })
 
-    return dailyRouters.sort((a, b) => b.time - a.time)
+    return dailyRouters.reverse()
 }
 
