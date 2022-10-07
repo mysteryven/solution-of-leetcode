@@ -23,7 +23,7 @@ export default defineConfig({
 
         ]
     }
-})
+})      
 
 function generateDailyRouters(suffix) {
     const dir = path.resolve(__dirname, '../', suffix)
