@@ -13,17 +13,25 @@ export default defineConfig({
         ],
         sidebar: [
             {
-                text: '每日一题（ 2022-10 ）',
-                items: generateDailyRouters('daily/2022-10')
+                text: '算法题',
+                items: generateDailyRouters('daily/2022-10'),
+                collapsible: true,
             },
             {
                 text: '周赛',
-                items:  generateDailyRouters('weekly') 
+                items: generateDailyRouters('weekly'),
+                collapsible: true,
+            },
+            {
+                text: '编程题',
+                items: [
+                    { text: '所有', link: '/js/index' },
+                ]
             }
 
         ]
     }
-})      
+})
 
 function generateDailyRouters(suffix) {
     const dir = path.resolve(__dirname, '../', suffix)
