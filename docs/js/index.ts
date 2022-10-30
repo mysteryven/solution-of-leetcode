@@ -52,4 +52,5 @@ export function myNew<T extends (...arg: any) => any>(Fn: T, ...args: Parameters
 
 function is(object: unknown, type: string): boolean  {
   return (Object.prototype.toString.call(object).slice(8, -1) as string).toLowerCase() === type
+
 }
