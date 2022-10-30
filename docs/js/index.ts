@@ -38,3 +38,18 @@ export function setInterval(fn: () => void, timeout: number) {
 export function clearInterval(timer: number) {
   clearTimeout(timerMap.get(timer).timer)
 }
+
+export function myNew<T extends (...arg: any) => any>(Fn: T, ...args: Parameters<T>) {
+  const obj = Object.create(Fn.prototype)
+
+  const res = Fn.call(obj, ...args as any)
+  if (is(res, 'object') || is(res, 'function')) {
+    return res
+  }
+
+  return obj
+}
+
+function is(object: unknown, type: string): boolean  {
+  return (Object.prototype.toString.call(object).slice(8, -1) as string).toLowerCase() === type
+}

@@ -1,5 +1,5 @@
-import {describe, assert, it, beforeEach, vi, afterEach, expect} from 'vitest'
-import { clearInterval, compose, setInterval } from ".";
+import {describe, assert, it, beforeEach, vi, afterEach, expect, test} from 'vitest'
+import { clearInterval, compose, myNew, setInterval } from ".";
 
 describe('compose', () => {
   function fn1(x: number) {
@@ -57,5 +57,34 @@ describe('setInterval', () => {
     expect(fn).toHaveBeenCalledTimes(2)
     vi.advanceTimersByTime(200)
     expect(fn).toHaveBeenCalledTimes(2)
+  })
+})
+
+describe('myNew', () => {
+  test('construct a new Person', () => {
+    function Person(name: string) {
+      this.name = name
+    }
+
+    const mysteryven = new Person('mysteryven')
+
+    expect(mysteryven).toStrictEqual(new Person('mysteryven'))
+    expect(Object.getPrototypeOf(mysteryven)).equal(Person.prototype)
+  })
+
+  test('get function value if it has returns', () => {
+    function Person(name: string) {
+      this.name = name
+
+      return {
+        obj: 1
+      }
+    }
+
+    const mysteryven = myNew(Person, 'hi')
+
+    expect(mysteryven).toStrictEqual({
+      obj: 1 
+    })
   })
 })
