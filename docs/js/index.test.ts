@@ -1,5 +1,5 @@
 import {describe, assert, it, beforeEach, vi, afterEach, expect, test} from 'vitest'
-import { clearInterval, compose, myNew, setInterval } from ".";
+import { clearInterval, compose, myNew, setInterval, findUnion } from ".";
 
 describe('compose', () => {
   function fn1(x: number) {
@@ -88,3 +88,10 @@ describe('myNew', () => {
     })
   })
 })
+
+describe('findUnion', () => {
+  test('normal case', () => {
+    expect(findUnion([1, 3,5,7,8], [3,6,8, 20,31])).toStrictEqual([3, 8])
+  })
+})
+
