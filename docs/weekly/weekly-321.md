@@ -55,7 +55,7 @@ var appendCharacters = function(s, t) {
 };
 ```
 
-[6247. 从链表中移除节点](https://leetcode.cn/problems/remove-nodes-from-linked-list/)
+## [6247. 从链表中移除节点](https://leetcode.cn/problems/remove-nodes-from-linked-list/)
 
 ```js
 /**
