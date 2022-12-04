@@ -1,5 +1,5 @@
 # solution-of-leetcode
 
-本仓库是每日一题和周赛的记录。
+本仓库记录周赛。
 
 [预览](https://mysteryven-leetcode.netlify.app)  

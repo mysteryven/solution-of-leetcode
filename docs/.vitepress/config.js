@@ -13,22 +13,21 @@ export default defineConfig({
         ],
         sidebar: [
             {
-                text: '算法题',
-                items: generateDailyRouters('daily/2022-10'),
-                collapsible: true,
-            },
-            {
                 text: '周赛',
                 items: generateDailyRouters('weekly'),
                 collapsible: true,
             },
-            {
-                text: '编程题',
-                items: [
-                    { text: '所有', link: '/js/index' },
-                ]
-            }
-
+            // {
+            //     text: '算法题',
+            //     items: generateDailyRouters('daily/2022-10'),
+            //     collapsible: true,
+            // },
+            // {
+            //     text: '编程题',
+            //     items: [
+            //         { text: '所有', link: '/js/index' },
+            //     ]
+            // }
         ]
     }
 })
@@ -51,6 +50,6 @@ function generateDailyRouters(suffix) {
         }
     })
 
-    return dailyRouters.reverse()
+    return dailyRouters
 }
 
