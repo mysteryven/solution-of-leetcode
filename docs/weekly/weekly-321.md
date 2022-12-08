@@ -4,6 +4,9 @@
 参加时间：2022-11-27
 :::
 
+打完这一场，分数是 1700。
+
+
 ## [6245. 找出中枢整数](https://leetcode.cn/problems/find-the-pivot-integer/)
 
 
