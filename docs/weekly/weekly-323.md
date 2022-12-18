@@ -34,7 +34,7 @@ var deleteGreatestValue = function(grid) {
 };
 ```
 
-[6258. 数组中最长的方波](https://leetcode.cn/problems/longest-square-streak-in-an-array/)
+## [6258. 数组中最长的方波](https://leetcode.cn/problems/longest-square-streak-in-an-array/)
 
 ```
 /**
