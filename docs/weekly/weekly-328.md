@@ -2,7 +2,7 @@
 # 第 328 场周赛
  
 :::info
-参加时间：2022-01-15
+参加时间：2022-01-15  
 名次：2172 / 4776	
 :::
 
@@ -53,7 +53,7 @@ var rangeAddQueries = function(n, queries) {
 
 ```
 
-##[6293. 统计好子数组的数目](https://leetcode.cn/problems/count-the-number-of-good-subarrays/)
+## [6293. 统计好子数组的数目](https://leetcode.cn/problems/count-the-number-of-good-subarrays/)
 
 ```js
 /**
