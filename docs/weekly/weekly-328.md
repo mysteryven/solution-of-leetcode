@@ -35,8 +35,6 @@ var differenceOfSum = function(nums) {
  * @return {number[][]}
  */
 var rangeAddQueries = function(n, queries) {
-  
-    
     let ret = Array.from({length: n}, () => new Array(n).fill(0));
     
     queries.forEach(([r1, c1, r2, c2]) => {
@@ -49,8 +47,39 @@ var rangeAddQueries = function(n, queries) {
     
     return ret
 };
+```
 
+上面我其实用了暴力解法，用例没有大数据量侥幸通过了，下面用二维差分做一下：
 
+```js
+/**
+ * @param {number} n
+ * @param {number[][]} queries
+ * @return {number[][]}
+ */
+var rangeAddQueries = function(n, queries) {
+    const diff = Array.from({length: n + 1}, () => new Array(n + 1).fill(0));
+    
+    for (const [r1, c1, r2, c2] of queries) {
+        diff[r1][c1] += 1;
+        diff[r1][c2 + 1] -= 1;
+        diff[r2 + 1][c1] -= 1;
+        diff[r2 + 1][c2 + 1] += 1        
+    }
+    
+    const ans = Array.from({length: n}, () => new Array(n).fill(0))
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            let a = i == 0 ? 0 : ans[i-1][j];
+            let b = j === 0 ? 0 : ans[i][j-1]
+            let c = i === 0 || j === 0 ? 0 : ans[i-1][j-1]
+            ans[i][j] = a + b - c + diff[i][j]
+        }
+    }
+    
+    return ans;
+};
 ```
 
 ## [6293. 统计好子数组的数目](https://leetcode.cn/problems/count-the-number-of-good-subarrays/)
